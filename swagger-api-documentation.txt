@@ -1,0 +1,1768 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is the documentation for the FINDMINE API.  You can find out more about
+    FINDMINE at [http://www.findmine.com](https://www.findmine.com) or on
+    [Github](https://github.com/findmine).
+  version: 1.1.0
+  title: FINDMINE API Documentation
+  termsOfService: 'https://www.findmine.com/legal'
+  contact:
+    email: support@findmine.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: dev.findmine.com
+tags:
+  - name: items
+    description: Everything to do with FINDMINE items
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+  - name: match sets
+    description: Everything to do with matching sets (outfits) to FINDMINE items
+  - name: analytics
+    description: Everything to do with FINDMINE analytics
+schemes:
+  - http
+  - https
+paths:
+  /api/v1/items:
+    post:
+      tags:
+        - items
+      summary: >-
+        Posts a url for an item, and is returned the item id of the item within
+        the FINDMINE system
+      description: >-
+        You can use items POST either to identify an item in the FINDMINE system
+        or to have the FINDMINE system ingest or scrape a totally new item.
+        Either way, items POST will return the FINDMINE item id of the item upon
+        success
+      operationId: postItem
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: url of item that you wish to identify or add to the FINDMINE system
+          required: true
+          schema:
+            $ref: '#/definitions/ItemsPost'
+      responses:
+        '200':
+          description: Success
+        '201':
+          description: >-
+            Success, and resource created with link representing FINDMINE item
+            ID in response
+      security:
+        - api_key: []
+    patch:
+      tags:
+        - items
+      summary: Update an existing item
+      description: Here is a nice long description of what you can do with items patch
+      operationId: updateItems
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Item related information that needs to be updated
+          required: true
+          schema:
+              $ref: '#/definitions/PatchItems'
+      responses:
+        '200':
+          description: Item successfully updated
+        '404':
+          description: Item not found
+        '500':
+          description: Incorrect parameters passed. Unable to update
+      security:
+        - api_key: []
+    get:
+      tags:
+        - items
+      summary: Gets items from the FINDMINE system
+      description: ''
+      operationId: getItem
+      produces:
+        - application/json
+      parameters:
+        - name: offset
+          in: query
+          description: The offset for the items results
+          required: false
+          type: integer
+        - name: limit
+          in: query
+          description: The limit for the items results
+          required: false
+          type: integer
+        - name: page
+          in: query
+          description: >-
+            If you assume that there are 100 items per page, you can select
+            which page of items results you would like returned to you
+          required: false
+          type: integer
+        - name: fields
+          in: query
+          description: >-
+            Fields refers to which fields related to items you would like
+            returned. You can specify images, image related fields, colors, and
+            color related fields. You can specify images, colors, and items
+            related fields. For example: fields=item_id,title,images(image_id,
+            img_url),colors(color_id,state,hex_code),category_id,stock,item_url
+          required: false
+          type: string
+        - name: store_ids
+          in: query
+          description: comma separated list of store ids that returned items must belong to
+          required: false
+          type: string
+        - name: store_name
+          in: query
+          description: store name that items must belong to
+          required: false
+          type: string
+        - name: brand_ids
+          in: query
+          description: >-
+            comma separated list of brand ids that the returned items must
+            belong to
+          required: false
+          type: string
+        - name: brand_name
+          in: query
+          description: brand name that items must belong to
+          required: false
+          type: string
+        - name: category_ids
+          in: query
+          description: >-
+            comma separated list of category ids that returned items must belong
+            to
+          required: false
+          type: string
+        - name: category_name
+          in: query
+          description: category name that items must belong to
+          required: false
+          type: string
+        - name: season_ids
+          in: query
+          description: >-
+            comma separated list of season ids that the returned items must
+            belong to
+          required: false
+          type: string
+        - name: season_name
+          in: query
+          description: season name that items must belong to
+          required: false
+          type: string
+        - name: team_ids
+          in: query
+          description: comma separated list of team ids that returned items must belong to
+          required: false
+          type: string
+        - name: team_name
+          in: query
+          description: team name that items must belong to
+          required: false
+          type: string
+        - name: sport_ids
+          in: query
+          description: >-
+            comma separated list of sport ids that the returned items must
+            belong to
+          required: false
+          type: string
+        - name: sport_name
+          in: query
+          description: sport name that items must belonged to
+          required: false
+          type: string
+        - name: size_ids
+          in: query
+          description: >-
+            comma separated list of size ids that the returned items must belong
+            to
+          required: false
+          type: string
+        - name: size_name
+          in: query
+          description: size name that items must belong to
+          required: false
+          type: string
+        - name: sale_ids
+          in: query
+          description: >-
+            comma separated list of sale ids that the returned items must belong
+            to
+          required: false
+          type: string
+        - name: sale_name
+          in: query
+          description: sale name that items must belong to
+          required: false
+          type: string
+        - name: fulltext
+          in: query
+          description: >-
+            fulltext refers to text search queries for items. The text search
+            queries results come from elasticsearch
+          required: false
+          type: string
+        - name: price
+          in: query
+          description: price that returned items must belong to
+          required: false
+          type: string
+        - name: lo_price
+          in: query
+          description: >-
+            If you wish to specify a price range for returned items to fall
+            within, you can specify a lo_price and a hi_price, and the items
+            returned will fall in that range. If you specify any combination of
+            price, lo_price and hi_price, the API will return items in the
+            logical range of the values you enter
+          required: false
+          type: string
+        - name: hi_price
+          in: query
+          description: >-
+            If you wish to specify a price range for returned items to fall
+            within, you can specify a lo_price and a hi_price, and the items
+            returned will fall in that range. If you specify any combination of
+            price, lo_price and hi_price, the API will return items in the
+            logical range of the values you enter. For example if you specify
+            price=10.00&lo_price=12.00&hi_price=8.00, the returned items will be
+            in the range of $8.00 to $12.00
+          required: false
+          type: string
+        - name: user_id
+          in: query
+          description: >-
+            if specified, the items returned will all have been last updated by
+            the user with the user_id specified
+          required: false
+          type: string
+        - name: item_url
+          in: query
+          description: the item_url that the item must have
+          required: false
+          type: string
+        - name: stock
+          in: query
+          description: the stock value that the item must be
+          required: false
+          type: string
+        - name: flagged
+          in: query
+          description: the flagged (1) or unflagged (0) value that the item must have
+          required: false
+          type: string
+        - name: pid
+          in: query
+          description: the product id of the item
+          required: false
+          type: string
+        - name: uni
+          in: query
+          description: the uni of the item
+          required: false
+          type: string
+        - name: words
+          in: query
+          description: the words associated with the item
+          required: false
+          type: string
+        - name: date_updated
+          in: query
+          description: the datetime that the item was last updated
+          required: false
+          type: string
+        - name: lo_date_updated
+          in: query
+          description: >-
+            If you wish to specify a date range for returned items to fall
+            within, you can specify a lo_date_updated and a hi_date_updated, and
+            the items returned will fall in that range. If you specify any
+            combination of date_updated, lo_date_updated and hi_date_updated,
+            the API will return items in the logical range of the values you
+            enter
+          required: false
+          type: string
+        - name: hi_date_updated
+          in: query
+          description: >-
+            If you wish to specify a date range for returned items to fall
+            within, you can specify a lo_date_updated and a hi_date_updated, and
+            the items returned will fall in that range. If you specify any
+            combination of date_updated, lo_date_updated and hi_date_updated,
+            the API will return items in the logical range of the values you
+            enter
+          required: false
+          type: string
+        - name: item_ids
+          in: query
+          description: comma separated list of item ids that the items must belong to
+          required: false
+          type: string
+        - name: match
+          in: query
+          description: >-
+            if you specify match as 0, then you are asking the items API to
+            return only items that currently cannot be matched to an outfit. By
+            default, the match value is 1
+          required: false
+          type: string
+      responses:
+        '200':
+          description: >-
+            Item(s) that match the query request were found and successfully
+            returned
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Item'
+        '404':
+          description: No items were found that match the query request
+      security:
+        - api_key: []
+  /api/v1/items/{itemId}:
+    patch:
+      tags:
+        - items
+      summary: Update an existing item
+      description: Here is a nice long description of what you can do with items patch
+      operationId: updateItem
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PatchItem'
+      responses:
+        '200':
+          description: Item successfully updated
+        '404':
+          description: Item not found
+        '500':
+          description: Incorrect parameters passed. Unable to update
+      security:
+        - api_key: []
+    get:
+      tags:
+        - items
+      summary: Returns the FINDMINE item
+      description: Here is a description of what FINDMINE get items with an item ID does
+      operationId: getItemById
+      produces:
+        - application/json
+      parameters:
+        - name: itemId
+          in: path
+          description: FINDMINE item ID
+          required: true
+          type: integer
+          format: int64
+        - name: fields
+          in: query
+          type: array
+          items:
+            type: string
+            enum: [brand_id, brand_name, category_id, category_name, colors(color_id, hex_code, pixel_count, weight), date_created, date_updated, description, flagged, images(byte_size, class_tag, height, id_tag, image_id, img_hash, img_url, magnitude, tag_idx, theta, top, width), item_id, item_url, pid, price, sale_id, sale_name, score, season_name, season_id, size_name, size_id, sport_id, sport_name, store_id, store_name, stock, team_id, team_name, title, uni, update_count, user_id]
+          description: |
+            Filter the fields returned in the FINDMINE Item by including those desired in the request. For example, if wishing to to only get the title, price, and an image URL, my request would be as follows: 
+            
+                https://www.findmine.com/api/v1/items/{itemId}?fields=title,price,images(img_url)
+              
+            Below is the full list of fields that can be filtered:
+            
+                brand_id,
+                brand_name,
+                category_id,
+                category_name,
+                colors(
+                    color_id,
+                    hex_code,
+                    image_id,
+                    pixel_count,
+                    weight
+                  ),
+                date_created,
+                date_updated,
+                description,
+                flagged,
+                images(
+                    byte_size,
+                    class_tag,
+                    height,
+                    id_tag,
+                    image_id,
+                    img_hash,
+                    img_url,
+                    item_id,
+                    magnitude,
+                    tag_idx,
+                    theta,
+                    top,
+                    width
+                  ),
+                item_id,
+                item_url,
+                pid,
+                price,
+                sale_id,
+                sale_name,
+                score,
+                season_name,
+                season_id,
+                size_name,
+                size_id,
+                sport_id,
+                sport_name,
+                store_id,
+                store_name,
+                stock,
+                team_id,
+                team_name,
+                title,
+                uni,
+                update_count,
+                user_id
+                
+            Note: For "images" and "colors" fields the user must include the desired fields within paratheses after the main field; for example:
+            
+                colors(color_id,hex_code,image_id,pixel_count,weight)
+                
+                images(byte_size,class_tag,height,id_tag,image_id,img_hash,img_url,item_id,magnitude,tag_idx,theta,top,width)
+      responses:
+        '200':
+          description: >-
+            Successfully found the requested item and returns the following item
+            data
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Item'
+        '404':
+          description: Item not found in the FINDMINE system
+      security:
+        - api_key: []
+    delete:
+      tags:
+        - items
+      summary: Deletes items from the FINDMINE system
+      description: ''
+      operationId: deleteItem
+      produces:
+        - application/json
+      parameters:
+        - name: itemId
+          in: path
+          description: the item id that you want to remove from the FINDMINE system
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successfully deleted item from FINDMINE system
+      security:
+        - api_key: []
+  /api/v1/match/sets/{itemId}:
+      get:
+        tags:
+          - match sets
+        summary: Returns FINDMINE set (outfit) to "complete the look" for passed item
+        parameters:
+          - name: itemId
+            in: path
+            description: FINDMINE item ID
+            required: true
+            type: integer
+            format: int64
+          - name: saled
+            in: query
+            description:  1, a set returned for an item must match the sale status of that item. 2, prevent on-sale items from being returned within any set.
+            required: false
+            type: integer
+          - name: branded
+            in: query
+            description: 1, prevent items from recommending sets with brands different from its own brand
+            required: false
+            type: integer
+            format: int64
+          - name: sized
+            in: query
+            description: 1, prevent sets with items of a different size from mixing, i.e. a recommended set would not include plus size and straight size items together. However, default size (accessories, shoes) can mix with either plus or straight size.
+            required: false
+            type: integer
+            format: int64
+          - name: sported
+            in: query
+            description: 1, non-default sport items cannot mix, i.e. a recommended set would not include a soccer jersey and basketball shorts together.
+            required: false
+            type: integer
+            format: int64
+          - name: teamed
+            in: query
+            description: 1, non-default team items cannot mix, i.e. a recommended set would not include a Celtics jersey and and Cavaliers shorts together.
+            required: false
+            type: integer
+            format: int64
+          - name: fields
+            in: query
+            type: array
+            items:
+              type: string
+              enum:
+                - brand_id
+                - brand_ids
+                - brand_name
+                - category_id
+                - category_name
+                - colors
+                - color_id
+                - hex_code
+                - pixel_count
+                - weight
+                - date_created
+                - date_updated
+                - description
+                - flagged
+                - images
+                - byte_size
+                - class_tag
+                - height
+                - id_tag
+                - image_id
+                - img_hash
+                - img_url
+                - magnitude
+                - tag_idx
+                - theta
+                - top
+                - width
+                - item_id
+                - item_url
+                - pid
+                - price
+                - sale_id
+                - sale_name
+                - score
+                - season_name
+                - season_id
+                - set_id
+                - set_items
+                - size_name
+                - size_id
+                - sport_id
+                - sport_name
+                - store_id
+                - store_ids
+                - store_name
+                - stock
+                - style_name
+                - team_id
+                - team_name
+                - title
+                - uni
+                - update_count
+                - user_id
+            description: >
+              Filter the fields returned in the FINDMINE Set and Set Items by including those
+              desired in the request. For example, if wishing to to only get the
+              set ID and the titles, prices, and an image URLs of all items included in the sets the request would be as follows: 
+
+                  https://www.findmine.com/api/v1/match/sets/{itemId}?fields=set_id,set_items(title,price,images(img_url))
+              
+              Below is the full list of fields that can be filtered:
+                
+                  brand_ids,
+                  date_created,
+                  date_updated,
+                  flagged,
+                  href,
+                  item_ids,
+                  occasion_name,
+                  occasion_id,
+                  published,
+                  set_id,
+                  set_items(
+                      brand_id,
+                      brand_name,
+                      category_id,
+                      category_name,
+                      colors(
+                          color_id,
+                          hex_code,
+                          image_id,
+                          pixel_count,
+                          weight
+                      ),
+                      date_created,
+                      date_updated,
+                      description,
+                      flagged,
+                      images(
+                          byte_size,
+                          class_tag,
+                          height,
+                          id_tag,
+                          image_id,
+                          img_hash,
+                          img_url,
+                          item_id,
+                          magnitude,
+                          tag_idx,
+                          theta,
+                          top,
+                          width
+                      ),
+                      item_id,
+                      item_url,
+                      pid,
+                      price,
+                      sale_id,
+                      sale_name,
+                      score,
+                      season_name,
+                      season_id,
+                      size_name,
+                      size_id,
+                      sport_id,
+                      sport_name,
+                      store_id,
+                      store_name,
+                      stock,
+                      team_id,
+                      team_name,
+                      title,
+                      uni,
+                      update_count,
+                      user_id
+                  ),
+                  store_ids,
+                  style_id,
+                  style_name,
+                  user_id
+                
+              Note: For "set_items" the user must include the
+              desired fields within paratheses after the main field; for example:
+
+                  set_items(title,price,images(img_url))
+        responses:
+          '200':
+            description: Recommended set exists and is returned
+          '400':
+            description: Incorrect permissions
+          '404':
+            description: No recommended sets exist
+          '500':
+            description: FINDMINE failed to match the item with a recommended set
+          '503':
+            description: ItemId was not passed in the request
+  /api/v1/analytics/pixel:
+      get:
+        tags:
+         - analytics
+        summary: >-
+          Transfers transaction info to FINDMINE via GET request for a pixel image
+        description: The query parameters of the GET request correspond to the transaction info
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        parameters:
+          - name: transaction_id
+            in: query
+            description: Transaction ID of the client's transaction
+            type: string
+          - name: transaction_timestamp
+            in: query
+            description: Timestamp of the client's transaction taken on their end
+            type: string
+          - name: total_price
+            in: query
+            description: Total price of the client's transaction
+            type: string
+          - name: total_discounts
+            in: query
+            description: Total discount of the client's transaction
+            type: string
+          - name: product_id
+            in: query
+            description: Product ID of the item purchased in the client's transaction
+            type: string
+          - name: product_title
+            in: query
+            description: Product title of the item purchased in the client's transaction
+            type: string
+          - name: product_quantity
+            in: query
+            description: Product quantity of the item purchased in the client's transaction
+            type: integer
+          - name: product_price
+            in: query
+            description: Product price of the item purchased in the client's transaction
+            type: string
+
+        responses:
+          '204':
+            description: Transaction info was sent to FINDMINE successfully
+          '400':
+            description: Bad request
+        security:
+        - api_key: []
+  /api/v1.1/match/sets:
+    post:
+      tags:
+       - match sets
+      summary: >-
+        Conglomeration of Items POST and Match Sets GET using Item URL
+      description: >-
+        Use match sets POST to pass the URL of the item in the body of the request to scrape the item and add it to FINDMINE and then, if possible, return a recommended set.
+      operationId: MatchSetsPostUrl
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: itemUrl
+          in: body
+          description: URL of item that you wish to identify or add to the FINDMINE system and get a set recommendation
+          required: true
+          schema:
+            $ref: '#/definitions/ItemsPost'
+        - name: saled
+          in: query
+          description:  1, a set returned for an item must match the sale status of that item. 2, prevent on-sale items from being returned within any set.
+          required: false
+          type: integer
+        - name: branded
+          in: query
+          description: 1, prevent items from recommending sets with brands different from its own brand
+          required: false
+          type: integer
+          format: int64
+        - name: sized
+          in: query
+          description: 1, prevent sets with items of a different size from mixing, i.e. a recommended set would not include plus size and straight size items together. However, default size (accessories, shoes) can mix with either plus or straight size.
+          required: false
+          type: integer
+          format: int64
+        - name: sported
+          in: query
+          description: 1, non-default sport items cannot mix, i.e. a recommended set would not include a soccer jersey and basketball shorts together.
+          required: false
+          type: integer
+          format: int64
+        - name: teamed
+          in: query
+          description: 1, non-default team items cannot mix, i.e. a recommended set would not include a Celtics jersey and and Cavaliers shorts together.
+          required: false
+          type: integer
+          format: int64
+        - name: fields
+          in: query
+          type: array
+          items:
+            type: string
+            enum:
+              - brand_id
+              - brand_ids
+              - brand_name
+              - category_id
+              - category_name
+              - colors
+              - color_id
+              - hex_code
+              - pixel_count
+              - weight
+              - date_created
+              - date_updated
+              - description
+              - flagged
+              - images
+              - byte_size
+              - class_tag
+              - height
+              - id_tag
+              - image_id
+              - img_hash
+              - img_url
+              - magnitude
+              - tag_idx
+              - theta
+              - top
+              - width
+              - item_id
+              - item_url
+              - pid
+              - price
+              - sale_id
+              - sale_name
+              - score
+              - season_name
+              - season_id
+              - set_id
+              - set_items
+              - size_name
+              - size_id
+              - sport_id
+              - sport_name
+              - store_id
+              - store_ids
+              - store_name
+              - stock
+              - style_name
+              - team_id
+              - team_name
+              - title
+              - uni
+              - update_count
+              - user_id
+          description: >
+            Filter the fields returned in the FINDMINE Set and Set Items by including those
+            desired in the request. For example, if wishing to to only get the
+            set ID and the titles, prices, and an image URLs of all items included in the sets the request would be as follows: 
+
+                https://www.findmine.com/api/v1/match/sets/{itemId}?fields=set_id,set_items(title,price,images(img_url))
+              
+            Below is the full list of fields that can be filtered:
+                
+                brand_ids,
+                date_created,
+                date_updated,
+                flagged,
+                href,
+                item_ids,
+                occasion_name,
+                occasion_id,
+                published,
+                set_id,
+                set_items(
+                    brand_id,
+                    brand_name,
+                    category_id,
+                    category_name,
+                    colors(
+                        color_id,
+                        hex_code,
+                        image_id,
+                        pixel_count,
+                        weight
+                    ),
+                    date_created,
+                    date_updated,
+                    description,
+                    flagged,
+                    images(
+                        byte_size,
+                        class_tag,
+                        height,
+                        id_tag,
+                        image_id,
+                        img_hash,
+                        img_url,
+                        item_id,
+                        magnitude,
+                        tag_idx,
+                        theta,
+                        top,
+                        width
+                    ),
+                    item_id,
+                    item_url,
+                    pid,
+                    price,
+                    sale_id,
+                    sale_name,
+                    score,
+                    season_name,
+                    season_id,
+                    size_name,
+                    size_id,
+                    sport_id,
+                    sport_name,
+                    store_id,
+                    store_name,
+                    stock,
+                    team_id,
+                    team_name,
+                    title,
+                    uni,
+                    update_count,
+                    user_id
+                ),
+                store_ids,
+                style_id,
+                style_name,
+                user_id
+                
+            Note: For "set_items" the user must include the
+            desired fields within paratheses after the main field; for example:
+
+                set_items(title,price,images(img_url))
+      responses: 
+        '200':
+          description: Item was successfully identified and a recommended set exists and is returned
+        '201':
+          description: Item did not exist in FINMDINE and was successfully scraped; a recommended set exists and is returned
+        '400':
+          description: No URL passed, bad request
+        '404':
+          description: Item was successfully identified OR scraped, but no recommended set exists
+        '412':
+          description: Failed to scrape item, thus failing to provided the precondition necessary to return recommended set
+        '500': 
+          description: Neither a url nor an item id was supplied
+      security:
+        - api_key: []
+  /api/v1.1/match/sets/{itemId}:
+    post: 
+      tags:
+       - match sets
+      summary: >-
+        Conglomeration of Items POST and Match Sets GET using Item ID
+      description: >-
+        Use match sets POST to pass an existing FINDMINE item ID to, if possible, return a recommended set.
+      operationId: MatchSetsPostId
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: itemId
+          in: path
+          description: FINDMINE item ID that you wish to identify and get a set recommendation
+          required: true
+          type: integer
+          format: int64
+        - name: saled
+          in: query
+          description:  1, a set returned for an item must match the sale status of that item. 2, prevent on-sale items from being returned within any set.
+          required: false
+          type: integer
+        - name: branded
+          in: query
+          description: 1, prevent items from recommending sets with brands different from its own brand
+          required: false
+          type: integer
+          format: int64
+        - name: sized
+          in: query
+          description: 1, prevent sets with items of a different size from mixing, i.e. a recommended set would not include plus size and straight size items together. However, default size (accessories, shoes) can mix with either plus or straight size.
+          required: false
+          type: integer
+          format: int64
+        - name: sported
+          in: query
+          description: 1, non-default sport items cannot mix, i.e. a recommended set would not include a soccer jersey and basketball shorts together.
+          required: false
+          type: integer
+          format: int64
+        - name: teamed
+          in: query
+          description: 1, non-default team items cannot mix, i.e. a recommended set would not include a Celtics jersey and and Cavaliers shorts together.
+          required: false
+          type: integer
+          format: int64
+        - name: fields
+          in: query
+          type: array
+          items:
+            type: string
+            enum:
+              - brand_id
+              - brand_ids
+              - brand_name
+              - category_id
+              - category_name
+              - colors
+              - color_id
+              - hex_code
+              - pixel_count
+              - weight
+              - date_created
+              - date_updated
+              - description
+              - flagged
+              - images
+              - byte_size
+              - class_tag
+              - height
+              - id_tag
+              - image_id
+              - img_hash
+              - img_url
+              - magnitude
+              - tag_idx
+              - theta
+              - top
+              - width
+              - item_id
+              - item_url
+              - pid
+              - price
+              - sale_id
+              - sale_name
+              - score
+              - season_name
+              - season_id
+              - set_id
+              - set_items
+              - size_name
+              - size_id
+              - sport_id
+              - sport_name
+              - store_id
+              - store_ids
+              - store_name
+              - stock
+              - style_name
+              - team_id
+              - team_name
+              - title
+              - uni
+              - update_count
+              - user_id
+          description: >
+            Filter the fields returned in the FINDMINE Set and Set Items by including those
+            desired in the request. For example, if wishing to to only get the
+            set ID and the titles, prices, and an image URLs of all items included in the sets the request would be as follows: 
+
+                https://www.findmine.com/api/v1/match/sets/{itemId}?fields=set_id,set_items(title,price,images(img_url))
+              
+            Below is the full list of fields that can be filtered:
+                
+                brand_ids,
+                date_created,
+                date_updated,
+                flagged,
+                href,
+                item_ids,
+                occasion_name,
+                occasion_id,
+                published,
+                set_id,
+                set_items(
+                    brand_id,
+                    brand_name,
+                    category_id,
+                    category_name,
+                    colors(
+                        color_id,
+                        hex_code,
+                        image_id,
+                        pixel_count,
+                        weight
+                    ),
+                    date_created,
+                    date_updated,
+                    description,
+                    flagged,
+                    images(
+                        byte_size,
+                        class_tag,
+                        height,
+                        id_tag,
+                        image_id,
+                        img_hash,
+                        img_url,
+                        item_id,
+                        magnitude,
+                        tag_idx,
+                        theta,
+                        top,
+                        width
+                    ),
+                    item_id,
+                    item_url,
+                    pid,
+                    price,
+                    sale_id,
+                    sale_name,
+                    score,
+                    season_name,
+                    season_id,
+                    size_name,
+                    size_id,
+                    sport_id,
+                    sport_name,
+                    store_id,
+                    store_name,
+                    stock,
+                    team_id,
+                    team_name,
+                    title,
+                    uni,
+                    update_count,
+                    user_id
+                ),
+                store_ids,
+                style_id,
+                style_name,
+                user_id
+                
+            Note: For "set_items" the user must include the
+            desired fields within paratheses after the main field; for example:
+
+                set_items(title,price,images(img_url))
+      responses: 
+        '200':
+          description: Item ID found and a recommended set exists and is returned
+        '201':
+          description: Item did not exist in FINMDINE and was successfully scraped; a recommended set exists and is returned
+        '400':
+          description: Bad request
+        '404':
+          description: Item was successfully identified OR scraped, but no recommended set exists
+        '412':
+          description: Failed to scrape item, thus failing to provided the precondition necessary to return recommended set
+        '500': 
+          description: Neither a url nor an item id was supplied
+      security:
+        - api_key: []
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Images:
+    type: array
+    items:
+      $ref: '#/definitions/Image'
+  Image:
+    type: object
+    properties:
+      tag_idx:
+        type: integer
+        example: 773
+      magnitude":
+        type: number
+        format: float
+        example: 840.5355435673
+      theta:
+        type: number
+        format: float
+        example: 0.9629943307
+      height:
+        type: integer
+        example: 690
+      byte_size:
+        type: integer
+        example: 91219
+      image_id:
+        type: integer
+        example: 1810852
+      img_url:
+        type: string
+        example: 'http://www.somestore.com/is/ima/1213C22_C3426'
+      item_id:
+        type: integer
+        example: 159810
+      class_tag:
+        type: string
+        example: productImageZoomable
+      id_tag:
+        type: string
+        description: often null
+        example: null
+      img_hash:
+        type: string
+        format: byte
+        example: c1e4a334fc1f7f20f5cfb
+      href:
+        type: string
+        example: /1810852
+      state:
+        type: integer
+        example: 2
+      width:
+        type: integer
+        example: 480
+      top:
+        type: integer
+        example: 199
+    xml:
+      name: Image
+  Colors:
+    type: array
+    items:
+      $ref: '#/definitions/Color'
+  Color:
+    type: object
+    properties:
+      color_id:
+        type: integer
+        example: 919367
+      item_id:
+        type: integer
+        example: 159820
+      href:
+        type: string
+        example: /919367
+      state:
+        type: integer
+        example: 1
+      image_id:
+        type: integer
+        example: 1810852
+      L:
+        type: number
+        format: float
+        example: 78.6211285527
+      a:
+        type: number
+        format: float
+        example: -2.834007788
+      b:
+        type: number
+        format: float
+        example: 2.4088203577
+      pixel_count:
+        type: integer
+        example: 11088
+      hex_code:
+        type: string
+        format: byte
+        example: bfc4be
+      weight:
+        type: number
+        format: float
+        example: 0.4156356788
+    xml:
+      name: Color
+  PatchItems:
+    type: object
+    properties:
+      store_id:
+        description: updated store id of the item
+        type: integer
+        example: 10
+      brand_id:
+        description: updated brand id of the item
+        type: integer
+        example: 6
+      category_id:
+        description: updated category id of the item
+        type: integer
+        example: 58
+      season_id:
+        description: updated season id of the item
+        type: integer
+        example: 7
+      team_id:
+        description: updated team id of the item
+        type: integer
+        example: 1
+      sport_id:
+        description: updated sport id of the item
+        type: integer
+        example: 12
+      size_id:
+        description: updated size id of the item
+        type: integer
+        example: 9
+      sale_id:
+        description: updated sale id of the item
+        type: integer
+        example: 5
+      title:
+        description: updated item title
+        type: string
+        example: Scoop Neck Plus Size Tank Top
+      price:
+        description: updated price of the item
+        type: number
+        format: float
+        example: 49.87
+      user_id:
+        description: updated FINDMINE user id of the last person to update the item
+        type: integer
+        example: 162
+      item_url:
+        description: url of the item
+        type: string
+        format: url
+        example: 'http://www.somestore/com/product/wonderful-dress'
+      stock:
+        description: update whether the item is in stock (1) or out of stock (0)
+        type: integer
+        example: 1
+      flagged:
+        description: update whether the item is flagged (1) or not (0)
+        type: integer
+        example: 0
+      pid:
+        description: updated product id of the item
+        type: string
+        example: AKD7848F
+      uni:
+        description: updated the unique identifier for the item
+        type: string
+        example: 25affc885754ga7
+      description:
+        description: updated description of the item
+        type: string
+        example: >-
+          soft and strechy material, versatile solid color, long length is
+          perfect for layering, scoop neck front and back, imported, 95% cotton
+          and 5% spandex, machine wash
+      words:
+        description: updated words associated with the item
+        type: array
+        items: 
+          type: string
+        example:
+          '0': 2
+          completely: 3
+          Basketball: 7
+          Women's: 1
+          at: 8
+          Harden: 1
+          limited: 4
+          I: 4
+          personalized: 2
+          UltraBoost: 3
+          Bags: 2
+          Not: 5
+          domestic: 4
+          Stan: 4
+          applied: 4
+          collections: 2
+          Tiro: 1
+          the: 13
+          Cleats: 1
+          football: 2
+          Arrivals: 7
+          we: 3
+          '*Because': 2
+          Weightlifting: 3
+          Service: 1
+          just: 5
+          reserves: 4
+          'on': 7
+          could: 4
+          right: 9
+          See: 4
+          Gift: 1
+          Map: 1
+          Welcome: 1
+          Customize: 4
+          miTeam: 1
+          '-': 3
+          Hats: 2
+          Explosive: 2
+          James: 1
+          be: 7
+          Sizing: 1
+          CSTU67: 1
+          This: 4
+          robb192002: 1
+          Stella: 5
+          Lillard: 1
+          Gloves: 2
+          Short: 2
+          within: 3
+          Softball: 2
+          date.: 4
+          search: 2
+          Long: 2
+          Z.N.E.: 2
+          Offer: 4
+          all: 13
+          Iconics: 1
+          Kids: 1
+          you: 14
+          Returns: 1
+          Fashion: 1
+          'shipping,': 4
+          Tubular: 2
+          next: 2
+          5-Star: 1
+          shoes: 4
+          apply: 4
+          Track: 7
+          Press: 1
+          Save: 2
+          We: 2
+          to: 12
+          None: 124
+          Title: 1
+          Gear: 1
+          Packs: 1
+          RETURNS: 2
+          accessories: 2
+          checkout.: 4
+          customize: 1
+          Running: 6
+          Tights: 2
+          Subscribe: 2
+          test: 1
+          Balls: 2
+      item_ids:
+        description: item ids that you wish to update - must be at least one
+        type: array
+        items:
+          type: integer
+        example:
+          '12354': null
+          '34465': null
+          '45636': null
+  PatchItem:
+    type: object
+    properties:
+      image_id:
+        description: >-
+          image id that you want to update to be default / non default image for
+          the item
+        type: integer
+        example: 1285736
+      color_id:
+        description: >-
+          color id that you want to update to be selected / deselected for the
+          item
+        type: integer
+        example: 43875677
+      store_id:
+        description: updated store id of the item
+        type: integer
+        example: 10
+      brand_id:
+        description: updated brand id of the item
+        type: integer
+        example: 6
+      category_id:
+        description: updated category id of the item
+        type: integer
+        example: 58
+      season_id:
+        description: updated season id of the item
+        type: integer
+        example: 7
+      team_id:
+        description: updated team id of the item
+        type: integer
+        example: 1
+      sport_id:
+        description: updated sport id of the item
+        type: integer
+        example: 12
+      size_id:
+        description: updated size id of the item
+        type: integer
+        example: 9
+      sale_id:
+        description: updated sale id of the item
+        type: integer
+        example: 5
+      title:
+        description: updated item title
+        type: string
+        example: Scoop Neck Plus Size Tank Top
+      price:
+        description: updated price of the item
+        type: number
+        format: float
+        example: 49.87
+      user_id:
+        description: updated FINDMINE user id of the last person to update the item
+        type: integer
+        example: 162
+      item_url:
+        description: url of the item
+        type: string
+        format: url
+        example: 'http://www.somestore/com/product/wonderful-dress'
+      stock:
+        description: update whether the item is in stock (1) or out of stock (0)
+        type: integer
+        example: 1
+      flagged:
+        description: update whether the item is flagged (1) or not (0)
+        type: integer
+        example: 0
+      pid:
+        description: updated product id of the item
+        type: string
+        example: AKD7848F
+      uni:
+        description: updated the unique identifier for the item
+        type: string
+        example: 25affc885754ga7
+      description:
+        description: updated description of the item
+        type: string
+        example: >-
+          soft and strechy material, versatile solid color, long length is
+          perfect for layering, scoop neck front and back, imported, 95% cotton
+          and 5% spandex, machine wash
+      words:
+        description: updated words associated with the item
+        type: array
+        items:
+          type: string
+        example:
+          '0': 2
+          completely: 3
+          Basketball: 7
+          Women's: 1
+          at: 8
+          Harden: 1
+          limited: 4
+          I: 4
+          personalized: 2
+          UltraBoost: 3
+          Bags: 2
+          Not: 5
+          domestic: 4
+          Stan: 4
+          applied: 4
+          collections: 2
+          Tiro: 1
+          the: 13
+          Cleats: 1
+          football: 2
+          Arrivals: 7
+          we: 3
+          '*Because': 2
+          Weightlifting: 3
+          Service: 1
+          just: 5
+          reserves: 4
+          'on': 7
+          could: 4
+          right: 9
+          See: 4
+          Gift: 1
+          Map: 1
+          Welcome: 1
+          Customize: 4
+          miTeam: 1
+          '-': 3
+          Hats: 2
+          Explosive: 2
+          James: 1
+          be: 7
+          Sizing: 1
+          CSTU67: 1
+          This: 4
+          robb192002: 1
+          Stella: 5
+          Lillard: 1
+          Gloves: 2
+          Short: 2
+          within: 3
+          Softball: 2
+          date.: 4
+          search: 2
+          Long: 2
+          Z.N.E.: 2
+          Offer: 4
+          all: 13
+          Iconics: 1
+          Kids: 1
+          you: 14
+          Returns: 1
+          Fashion: 1
+          'shipping,': 4
+          Tubular: 2
+          next: 2
+          5-Star: 1
+          shoes: 4
+          apply: 4
+          Track: 7
+          Press: 1
+          Save: 2
+          We: 2
+          to: 12
+          None: 124
+          Title: 1
+          Gear: 1
+          Packs: 1
+          RETURNS: 2
+          accessories: 2
+          checkout.: 4
+          customize: 1
+          Running: 6
+          Tights: 2
+          Subscribe: 2
+          test: 1
+          Balls: 2
+  Item:
+    type: object
+    properties:
+      brand_id:
+        description: the brand that the item is associated with
+        type: integer
+        example: 6
+      brand_name:
+        description: name of the brand
+        type: string
+        example: StellaSport
+      category_id:
+        description: the category that the item is associated with
+        type: integer
+        example: 58
+      category_name:
+        description: name of the category
+        type: string
+        example: Tank Top
+      description:
+        description: the description of the item
+        type: string
+        example: >-
+          soft and strechy material, versatile solid color, long length is
+          perfect for layering, scoop neck front and back, imported, 95% cotton
+          and 5% spandex, machine wash
+      details:
+        description: a dictionary of item details - often empty
+        type: object
+        example: '{}'
+      flagged:
+        description: whether the item is flagged or not
+        type: integer
+        example: 0
+      item_id:
+        description: the FINDMINE item id for the item
+        type: integer
+        example: 159820
+      item_url:
+        description: url of the item
+        type: string
+        format: url
+        example: 'http://www.somestore/com/product/wonderful-dress'
+      pid:
+        description: product id of the item
+        type: string
+        example: AKD7848F
+      price:
+        description: price of the item
+        type: number
+        format: float
+        example: 49.87
+      sale_id:
+        description: sale id of the item
+        type: integer
+        example: 5
+      sale_name:
+        description: sale status of the item
+        type: string
+        example: Clearance
+      season_id:
+        description: season id of the item
+        type: integer
+        example: 7
+      season_name:
+        description: season of the item
+        type: string
+        example: Fall17
+      size_id:
+        description: size id of the item
+        type: integer
+        example: 9
+      size_name:
+        description: size of the item
+        type: string
+        example: Plus Size
+      sport_id:
+        description: sport id of the item
+        type: integer
+        example: 12
+      sport_name:
+        description: sport of the item
+        type: string
+        example: Basketball
+      stock:
+        description: whether the item is in stock or out of stock
+        type: integer
+        example: 1
+      store_id:
+        description: store id of the item
+        type: integer
+        example: 10
+      store_name:
+        description: name of store that item is from
+        type: string
+        example: John Varvatos
+      team_id:
+        description: team id of the item
+        type: integer
+        example: 1
+      team_name:
+        description: team of the item
+        type: string
+        example: Default Team
+      title:
+        description: item title
+        type: string
+        example: Scoop Neck Plus Size Tank Top
+      uni:
+        description: a unique identifier for the item
+        type: string
+        example: 25affc885754ga7
+      date_created:
+        description: the datetime that the item was created
+        type: string
+        format: datetime
+        example: '2017-06-21 12:04:12'
+      date_updated:
+        description: the datetime that the item was last updated
+        type: string
+        format: datetime
+        example: '2017-06-23 16:27:02'
+      update_count:
+        description: the number of times the item has been updated
+        type: integer
+        example: 2
+      user_id:
+        description: FINDMINE user id of the last person to update the item
+        type: integer
+        example: 162
+      score:
+        description: the relevance score of the result
+        type: integer
+        example: null
+      href:
+        description: path of the item
+        type: string
+        example: 'https://www.findmine.com/api/v1/items/159820'
+      images:
+        $ref: '#/definitions/Images'
+      colors:
+        $ref: '#/definitions/Colors'
+    xml:
+      name: Item
+  ItemsPost:
+    type: object
+    properties:
+      url:
+        description: url of the product you wish to identify or add to the system
+        type: object
+        example: 'http://www.somestore/com/product/wonderful-dress'
+    xml:
+      name: ItemsPost
+  MatchSetsPostUrl:
+    type: object
+    properties:
+      url:
+        description: URL of the item needing identified or to be added to the system
+        type: object
+        example: 'http://www.somestore/com/product/wonderful-dress'
