@@ -1,3 +1,167 @@
+#Integration Guide
+
+####Requirements
+This document presumes that the reader is familiar with html, javascript, and jQuery.
+
+####Terminology
+- Findmine: the Findmine server and API, which responds to you, the client
+- findmine.js: a javascript file that contains the client-side code
+- findmine: a javascript object, created upon the execution of findmine.js, which provides front-end functionality for accessing Findmine
+- item: one of your products, represented as a single product page
+- recommendations set: a collection of items that complement the currently displayed item
+
+###1. Embed the findmine.js module into your website
+findmine.js creates a global javascript object called findmine, which you can use to request recommendations.
+You should embed findmine.js into each item’s product page.
+To embed findmine.js, simply include the following lines in your html:
+<script src="http://www.findmine.us/findmine-latest.js"> </script>
+
+###2. Get acquainted with the findmine object
+The findmine object exposes three important methods:
+
+• identify(params)
+
+– params: a javascript object to override some of the data that Find-
+mine would otherwise attempt to determine on its own (see API
+
+Documentation for details)
+
+Asks Findmine for its representation of the item on the page.
+
+Receives the item’s data, then stores it in the findmine.identity vari-
+able.
+
+Returns a jQuery Deferred object.
+
+This method can be ignored, unless you would like to use it for test-
+ing/development purposes.
+
+• match(params, branded)
+
+– params: same as in identify()
+
+– branded: a boolean value (see API Documentation for details)
+
+Asks Findmine for recommendation sets!
+
+Receives a list of recommendation sets, then stores it in the
+
+findmine.matched variable.
+
+Returns a jQuery Deferred object.
+
+• render(selector, config)
+
+– selector: the CSS selector for the html element to be rendered into,
+
+defaulting to "#findmine-container"
+
+– config: a javascript object for configuring render’s output, defaulting
+
+to:
+
+{
+
+header: "Complete the Look",
+
+next: "Next Outfit",
+
+previous: "Previous Outfit"
+
+}
+
+Helper function that renders the results of match() into an html element.
+
+3. Call match(), and configure the callback methods
+
+This section also applies to identify()
+
+Because match() returns a Deferred object, you really should attach asyn-
+chronous handlers to be called upon its completion.
+
+For example, the following code calls match() and attaches the .done() and
+
+.fail() handlers to the Deferred object.
+
+Note that the handlers are chained in jQuery fashion. Please see jQuery’s doc-
+umentation for more details.
+
+$(window).load(function() {
+
+if (typeof findmine !== "undefined") {
+
+findmine.match(null, true).done(function() {
+
+// Place your custom code here.
+
+// The results data is in findmine.matched
+
+// Or use the helper function.
+
+findmine.render('#findmine-container');
+
+// Handle exceptions here
+
+alert("The system is down.")
+
+}).fail(function() {
+
+});
+
+}
+
+});
+
+3. Create your own html or style ours
+
+The match() method stores our recommendations within the findmine object,
+
+in findmine.matched. Therefore, you can access this data and update your
+
+page however you’d like.
+
+The render() method will produce a bare-bones html element containing the
+
+recommendations data from the match() results. Therefore, you can style this
+
+element as you see fit.
+
+4. Work with us to improve the data Findmine identifies
+
+from your items
+
+Findmine identifies and recommends items based on several pieces of data that
+
+we gather from your website. This data includes:
+
+• title
+
+• descriptions
+
+• images
+
+• price
+
+We use a machine learning model by default to find these pieces of data in your
+
+page. But you can make item recognition even more accurate by tagging this
+
+data in your page in a CSS-identifiable way. We will then work with you to
+
+develop a protocol for retrieving your tagged data.
+
+5. The End
+
+That’s it. Sit back and enjoy automatically generated product recommendations
+
+on your site. Keep in mind that the recommendations may not appear right
+
+away and will only start working officially once our representatives process your
+
+company’s paper work.
+
+
+
 ### 1. Click Install
 To begin on-boarding of our service on your e-commerce site locate our findmine app on shopify's app-store and hit the get button found on the app's page. Then when the new page pops hit the install FINDMINE button and move on the the next instruction. Alternatively you have received a link from us instructing you to follow that link. By hitting the link you will be redirected to the same page where you can find the install FINDMINE button. Hit it and move on the following instruction. 
 
