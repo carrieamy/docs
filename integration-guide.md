@@ -13,10 +13,12 @@ This document presumes that the reader is familiar with html, javascript, and jQ
 ###1. Embed the findmine.js module into your website
 **findmine.js** creates a global javascript object called **findmine**, which you can use to request recommendations. In order to embed the findmine.js module simply include the following lines in the header section of the html code pertaining to the product pages.
 ```html
-<script src="http://www.findmine.us/findmine-latest.js?shop={{shop.id}}"> </script>
+<script src="http://www.findmine.us/findmine-latest.js?shop={{shop.key}}"> </script>
 ```
-In place of the **{{shop.id}}** you must provide the id number for your store.  
-
+In place of **{{shop.key}}** you must provide the key identity for your store. This key may be obtained from our representatives. This key allows our system to generate a unique findmine.js file for your store in case we were tasked with the responsibility of designing your store's styling and look. If you provide a key that our system does not recognizes or omit the key entirely (as shown below) then our system will return a default version of the findmine.js module.
+```html
+<script src="http://www.findmine.us/findmine-latest.js"> </script>
+```
 
 ###2. Get acquainted with the findmine object
 The findmine object exposes three important methods:
