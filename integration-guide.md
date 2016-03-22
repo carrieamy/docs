@@ -72,7 +72,7 @@ previous: "Previous Outfit"
 
 Helper function that renders the results of match() into an html element.
 
-3. Call match(), and configure the callback methods
+###3. Call match(), and configure the callback methods
 
 This section also applies to identify()
 
@@ -86,33 +86,24 @@ For example, the following code calls match() and attaches the .done() and
 Note that the handlers are chained in jQuery fashion. Please see jQuery’s doc-
 umentation for more details.
 
+```javascript
 $(window).load(function() {
+    if (typeof findmine !== "undefined") {
+        findmine.match(null, true).done(function() {
+            // Place your custom code here.
+            // The results data is in findmine.matched
 
-if (typeof findmine !== "undefined") {
-
-findmine.match(null, true).done(function() {
-
-// Place your custom code here.
-
-// The results data is in findmine.matched
-
-// Or use the helper function.
-
-findmine.render('#findmine-container');
-
-// Handle exceptions here
-
-alert("The system is down.")
-
-}).fail(function() {
-
+            // Or use the helper function.
+            findmine.render('#findmine-container');
+        }).fail(function() {
+            // Handle exceptions here
+            alert("The system is down.")
+        });
+    }
 });
+```
 
-}
-
-});
-
-3. Create your own html or style ours
+###3. Create your own html or style ours
 
 The match() method stores our recommendations within the findmine object,
 
@@ -126,39 +117,21 @@ recommendations data from the match() results. Therefore, you can style this
 
 element as you see fit.
 
-4. Work with us to improve the data Findmine identifies
+###4. Work with us to improve the data Findmine identifies from your items
+Findmine identifies and recommends items based on several pieces of data that we gather from your website. This data includes:
+- title
+- descriptions
+- images
+- price
 
-from your items
+We use a machine learning model by default to find these pieces of data in your page. But you can make item recognition even more accurate by tagging this data in your page in a CSS-identifiable way. We will then work with you to develop a protocol for retrieving your tagged data.
 
-Findmine identifies and recommends items based on several pieces of data that
+### 5. The End
+This is it. Nothing else is left to do and now it is time to sit back and enjoy automatically generated product recommendations on your site. Keep in mind that the recommendations may not appear right away and will only start working officially once our technical team process your activates the system.
 
-we gather from your website. This data includes:
+**NOTE**
 
-• title
-
-• descriptions
-
-• images
-
-• price
-
-We use a machine learning model by default to find these pieces of data in your
-
-page. But you can make item recognition even more accurate by tagging this
-
-data in your page in a CSS-identifiable way. We will then work with you to
-
-develop a protocol for retrieving your tagged data.
-
-5. The End
-
-That’s it. Sit back and enjoy automatically generated product recommendations
-
-on your site. Keep in mind that the recommendations may not appear right
-
-away and will only start working officially once our representatives process your
-
-company’s paper work.
+If for some reason something is not working or these instructions are not sufficient to get the module running on your website absolutely feel free to email us at support@findmine.us and we will make sure to resolve any problem you have with setting our system. 
 
 
 
