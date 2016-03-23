@@ -20,53 +20,36 @@ In place of **{{shop.key}}** you must provide the key identity for your store. T
 <script src="http://www.findmine.us/findmine-latest.js"> </script>
 ```
 
+Once the module is loaded **findmine** object will be created globally and may be interacted with via the console.
+![Findmine Global](https://github.com/Mishki/docs/blob/master/assets/findmine-global.gif)
+
 ###2. The findmine Object Description
 The findmine object exposes three important methods:
 
 ```javascript
 findmine.identify(identity)
 ```
-This method connects to FINDMINE in order to identify the item on the page. The function returns returns a jQuery Deferred object containing the data returned from the server upon success or the error status codes upon failure. This function accepts an object as it's parameter for the purpose of overriding some of the data that FINDMINE would otherwise attempt to determine on its own using machine learning mechanisms.
-
-This method may be ignored, unless used for testing or development purposes.
+This method connects to FINDMINE in order to identify the item on the page. The function returns returns a jQuery Deferred object containing the data returned from the server upon success or the error status codes upon failure. This function accepts an object as it's parameter for the purpose of overriding some of the data that FINDMINE would otherwise attempt to determine on its own using machine learning mechanisms. This method may be ignored, unless used for testing or development purposes.
 
 ```javascript
 findmine.match(identity, inquiry)
 ```
-
+The match method communicates with FINDMINE to find recommendation for the sample item and stores the resulting recommendations in the **matched** section of the findmine object. Match internally invokes the identify function described above and therefore can be used exclusively without invoking identify before hand. This module returns a jQuery Deferred object containing the recommended sets data upon success or the error status codes upon failure. This function accepts two objects as it's arguments. The idenitity is passed internatlly to the identity function. Just as described above, the purpose of this parameter is for overriding some of the data that FINDMINE otherwise has to determine using machine learning. This allows for better accuracy and maintenance. The inquiry object may contain to keys internally. These are **union** and **mixed**. These keys are very specific to the recommendations your store would have and therefore should be consulted before providing. Alternatively inquiry can just be undefined or null.
 
 ```javascript
 findmine.render(selector, config)
 ```
-
-balhd
-– selector: the CSS selector for the html element to be rendered into,
-
-defaulting to "#findmine-container"
-
-– config: a javascript object for configuring render’s output, defaulting
-
-to:
-
+The render function renders the necessary html to the specified tag by the **selector** parameter. This is simply a css selector string pointing to the empty div object where this html should be generated. This function is optional and may be avoided alltogether in case you decide to implement your own front end. Alternatively this function may be used in conjunstion with your own styling file for a customized styling. The config parameter helps fill in some customization information when the html is being generated. Below is an example of the information you may be able to switch. 
+```javascript
 {
-
-header: "Complete the Look",
-
-next: "Next Outfit",
-
-previous: "Previous Outfit"
-
+    header: "Complete the Look",
+    next: "Next Outfit",
+    previous: "Previous Outfit"
 }
+```
 
-Helper function that renders the results of match() into an html element.
-
-###3. Call match(), and configure the callback methods
-This section also applies to identify()
-Because match() returns a Deferred object, you really should attach asyn-chronous handlers to be called upon its completion.
-For example, the following code calls match() and attaches the .done() and
-.fail() handlers to the Deferred object.
-Note that the handlers are chained in jQuery fashion. Please see jQuery’s doc-
-umentation for more details.
+###3. Call match(), and Configure the Callback Methods
+When match() completes it returns a Deferred object, and you really would be able to attach asyn-chronous handlers to be called upon its completion. This section also applies to identify(). For example, the following code calls match() and attaches the .done() and .fail() handlers to the Deferred object. Note that the handlers are chained in jQuery fashion. Please see jQuery’s documentation for more details.
 
 ```javascript
 $(window).load(function() {
@@ -85,9 +68,12 @@ $(window).load(function() {
 });
 ```
 
-###3. Create your own html or style ours
-The match() method stores our recommendations within the findmine object, in findmine.matched. Therefore, you can access this data and update your page however you’d like.
-The render() method will produce a bare-bones html element containing the recommendations data from the match() results. Therefore, you can style this element as you see fit.
+###3. Create your Own html or Style with Ours
+The match() method stores our recommendations within the findmine object, in findmine.matched. Therefore, you can access this data and update your page however you’d like. The render() method will produce a bare-bones html elements containing the recommendations data from the match() results. Therefore, you can style this element as you see fit. If you chose to use our default styling make sure to include the approapriate link tag in the header section of your product html code.
+```html
+<link rel="stylesheet" type="text/css" href="https://www.findmine.us/static/css/findmine.css">
+```
+Alternatively you may either implement your own styling or work with our representatives to obtain the appropriate url for the stylesheet file FINDMINE have built for your store.
 
 ###4. Work with us to improve the data Findmine identifies from your items
 Findmine identifies and recommends items based on several pieces of data that we gather from your website. This data includes:
