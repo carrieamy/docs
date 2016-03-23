@@ -10,7 +10,7 @@ This document presumes that the reader is familiar with html, javascript, and jQ
 - **item**: a unit representing a single identified product page. The product based on which the recommendation is being generated may be referred to as **sample item**, in contrast to the items which comprise a single recommended set.
 - **set**: a collection of items that complement the currently displayed sample item. Each set may or may not contain the sample item amongst the items associated to the set.
 
-###1. Embed the findmine.js module into your website
+###1. Embed findmine.js Module into your Website
 **findmine.js** creates a global javascript object called **findmine**, which you can use to request recommendations. In order to embed the findmine.js module simply include the following lines in the header section of the html code pertaining to the product pages.
 ```html
 <script src="http://www.findmine.us/findmine-latest.js?shop={{shop.key}}"> </script>
@@ -20,42 +20,26 @@ In place of **{{shop.key}}** you must provide the key identity for your store. T
 <script src="http://www.findmine.us/findmine-latest.js"> </script>
 ```
 
-###2. Get acquainted with the findmine object
+###2. The findmine Object Description
 The findmine object exposes three important methods:
 
-• identify(params)
+```javascript
+findmine.identify(identity)
+```
+This method connects to FINDMINE in order to identify the item on the page. The function returns returns a jQuery Deferred object containing the data returned from the server upon success or the error status codes upon failure. This function accepts an object as it's parameter for the purpose of overriding some of the data that FINDMINE would otherwise attempt to determine on its own using machine learning mechanisms.
 
-– params: a javascript object to override some of the data that Find-
-mine would otherwise attempt to determine on its own (see API
+This method may be ignored, unless used for testing or development purposes.
 
-Documentation for details)
+```javascript
+findmine.match(identity, inquiry)
+```
 
-Asks Findmine for its representation of the item on the page.
 
-Receives the item’s data, then stores it in the findmine.identity vari-
-able.
+```javascript
+findmine.render(selector, config)
+```
 
-Returns a jQuery Deferred object.
-
-This method can be ignored, unless you would like to use it for test-
-ing/development purposes.
-
-• match(params, branded)
-
-– params: same as in identify()
-
-– branded: a boolean value (see API Documentation for details)
-
-Asks Findmine for recommendation sets!
-
-Receives a list of recommendation sets, then stores it in the
-
-findmine.matched variable.
-
-Returns a jQuery Deferred object.
-
-• render(selector, config)
-
+balhd
 – selector: the CSS selector for the html element to be rendered into,
 
 defaulting to "#findmine-container"
