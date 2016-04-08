@@ -45,20 +45,17 @@ The render function renders the necessary html to the specified tag by the **sel
 ```
 
 ###3. Call match(), and Configure the Callback Methods
-When match() completes, it returns a Deferred object, and you really would be able to attach asynchronous handlers to be called upon its completion. This section also applies to identify(). For example, the following code calls match() and attaches the .done() and .fail() handlers to the Deferred object. Note that the handlers are chained in jQuery fashion. Please see jQuery’s documentation for more details.
+When match() completes, it returns a Deferred object, and you really would be able to attach asynchronous handlers to be called upon its completion. This section also applies to identify(). For example, the following code calls match() and attaches the .then() handler to the Deferred object. Note that the handlers are chained in jQuery fashion. Please see jQuery’s documentation for more details.
 
 ```javascript
 $(window).load(function() {
     if (typeof findmine !== "undefined") {
-        findmine.match(null).done(function() {
+        findmine.match().then(function() {
             // Place your custom code here.
             // The results data is in findmine.matched
 
             // Or use the helper function.
             findmine.render('#findmine-container');
-        }).fail(function() {
-            // Handle exceptions here
-            alert("The system is down.")
         });
     }
 });
