@@ -48,7 +48,7 @@ The render function renders the necessary html to the specified tag by the **sel
 When match() completes, it returns a Deferred object, and you really would be able to attach asynchronous handlers to be called upon its completion. This section also applies to identify(). For example, the following code calls match() and attaches the .done() and .fail() handlers to the Deferred object. Note that the handlers are chained in jQuery fashion. Please see jQuery’s documentation for more details.
 
 ```javascript
-$(window).load(function() {
+$(document).ready(function() {
     if (typeof findmine !== "undefined") {
         findmine.match(null, true).done(function() {
             // Place your custom code here.
