@@ -13,7 +13,7 @@ This document presumes that the reader is familiar with html, javascript, and jQ
 ###1. Embed findmine.js Module into your Website
 **findmine.js** creates a global javascript object called **findmine**, which you can use to request recommendations. In order to embed the findmine.js module, simply include the following lines in the header section of the html code pertaining to the product detail pages.
 ```html
-<script src="http://www.findmine.us/findmine-latest.js"> </script>
+<script src="http://www.findmine.com/findmine-latest.js"> </script>
 ```
 
 Once the module is loaded, the **findmine** object will be created globally and may be interacted with via the console.
@@ -64,7 +64,7 @@ $(window).load(function() {
 ###3. Create Your Own HTML or Style Ours
 The match() method stores our recommendations within the findmine object, in findmine.matched. Therefore, you can access this data and update your page however you’d like. The render() method will produce a bare-bones html elements containing the recommendations data from the match() results. Therefore, you can style this element as you see fit. If you chose to use our default styling make sure to include the approapriate link tag in the header section of your product html code.
 ```html
-<link rel="stylesheet" type="text/css" href="https://www.findmine.us/static/css/findmine.css">
+<link rel="stylesheet" type="text/css" href="https://www.findmine.com/static/css/findmine.css">
 ```
 Alternatively you may either implement your own styling or work with our representatives to obtain the appropriate url for the stylesheet file FINDMINE has built for your store.
 
