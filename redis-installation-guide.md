@@ -2,7 +2,7 @@
 
 Redis is an in-memory key-value store known for its flexibility, performance, and wide language support. This guide should help you to install redis on your personal computer so that you can run the FINDMINE app locally.
 
-Note: This tutorial has been tested on Linux Mint, and is based off [this tutorial][tutorial]
+Note: This tutorial has been tested on Linux Mint, and was built based on the Ubuntu 16.04 machine, and is based off [this tutorial][tutorial]
 
 ### Prerequisites
 To complete this guide, you will need sudo privileges and access to FINDMINE's webservers.
