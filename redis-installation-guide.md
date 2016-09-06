@@ -54,14 +54,14 @@ $ sudo mkdir /etc/redis
 Now, copy over the [Redis configuration file][googledoc] that is in the FINDMINE Engineering Folder on Google Drive
 
 ```sh
-$ sudo cp /path/to/Mishki/Engineering/Docs/redis.conf /etc/redis
+$ sudo cp /path/to/redis.conf /etc/redis
 ```
 
 #### Create a Redis systemd Unit File
 We need to create a systemd unit file so that the init system can manage the Redis process. Create this file by copying over the [Redis systemd unit file][redis.service] that is in the FINDMINE Engineering Folder on Google Drive.
 
 ```sh
-$ sudo cp /path/to/Mishki/Engineering/Docs/redis.service /etc/systemd/system/redis.service
+$ sudo cp /path/to/redis.service /etc/systemd/system/redis.service
 ```
 
 #### Create the Redis User, Group and Directories
