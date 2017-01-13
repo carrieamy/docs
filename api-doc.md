@@ -1,15 +1,19 @@
 # GENERATING RECOMMENDATIONS
 
-In order to generate a recommendation two api endpoints play instrumental role in doing so. The items POST and the match sets GET calls. The match sets api call is the endpoint that actually generates the recommendation however, one must provide an `item_id` of the sample item for which the recommendation will be generated. Since in most cases the request to the FINDMINE servers is generated from the client side and that `item_id` is unknown to the client a second api call can be used to object the id in question. By invoking the items POST call a client is telling FINDMINE to please identify the item in question, by providing parameters describing the item, and items POST will return back the `item_id` of the product. The way items POST is designed is to always return an `item_id`. What that means in practice is that if items POST was not able to identify the product whose information was provided, items POST will then create a new record for a new item in the FINDMINE system and return a new `item_id` value in the form of a `Location` HTTP header.
+Two FINDMINE API endpoints are needed in order to generate a recommendation for a particular item: the items POST and the match sets GET calls. The match sets API call is the endpoint that actually generates the recommendation for a particular item. However, one must provide a FINDMINE `item_id` of the item for which the recommendation will be generated. Since, in most cases, the request to the FINDMINE servers is generated from the client side and that FINDMINE `item_id` is unknown to the client, a second API call can be used to obtain the id in question. 
+
+By invoking the items POST call, a client is telling FINDMINE to identify the item in question, by providing parameters describing the item. Items POST will then return the `item_id` of the product. 
+
+The way items POST is designed is to always return an `item_id`. What that means in practice is that if items POST was not able to identify the product whose information was provided, items POST will then create a new record for a new item in the FINDMINE system and return a new `item_id` value in the form of a `Location` HTTP header.
 
 ## Item Identification
 ```http
 POST /api/v1/items
 ```
 
-This request identifies the product that the recommendation will be based upon. The request ensure that the "sample" product of the recommendation has been previously ingested into the FINDMINE system and has been processed. To do so, the endpoint will accept information about the product from the user, process it to conform the provided information to the FINDMINE standards, and finally return a `Localtion` header pointing to the api endpoint where this item can be examined and manipulated. This endpoint will always return a `Location` header with the `item_id` integer, assuming the request was successful.
+This request identifies the item that the recommendation will be based upon. The request ensures that the item of the recommendation has been previously ingested into the FINDMINE system and has been processed. To do so, the endpoint will accept information about the item from the user, and process it so that it conforms to FINDMINE standards. Finally, the endpoint returns a `Location` header pointing to the API endpoint where this item can be examined and manipulated. This endpoint will always return a `Location` header with the `item_id` integer, assuming the request was successful.
 
-> This call is a syncronous call and will block for a few seconds if the item cannot be identifies quickly and requires the recording a new item and machine learning for processing the provided parameters. In order to ensure one's system does not block, use some version of a promise or future objects to attach a callback for when this call is complete.
+> This call is a synchronous call and will block for a few seconds if the item cannot be identified quickly and requires the recording of a new item and machine learning for processing the provided parameters. In order to ensure that one's system does not block, use some version of a promise or future objects to attach a callback for when this call is completed.
 
 ##### Sample Request
 ```http
@@ -44,7 +48,7 @@ Location: https://www.findmine.com/api/v1/items/<item_id:int>
 
 - `url` [ *str* ] **required** - url of the product page that contains the identifiable item.
 - `html` [ *str* ] - raw and rendered version of the html code of the product page.
-- `words` - TODO
+- `words` - 
 - `images` [ *list[dict]* ] - list of objects containing image information of the sample product.
 - `sport` [ *int* | *str* ] - either an exact number representing the sport_id on the FINDMINE system or a string definition of the particular sport of the product.
 - `category` [ *int* | *str* ] - either an exact number representing the category_id of the product or a string definition of the category for the product. For the string definition, this may include bread crumbs, category name, etc.
@@ -59,11 +63,11 @@ Location: https://www.findmine.com/api/v1/items/<item_id:int>
 > `pid` does not have to be unique, however, if it is not when searching for those PID's the search result will provide multiple results.
 
 ##### Return Codes
-- **200** - item was found on the system.
-- **201** - item was not found but was scraped and added to the system with the help of the provided JSON encoded body parameters.
-- **400** - something is wrong with the request. Either required headers or parameters are missing. Malformed Request.
-- **403** - credentials were not provided with the request and the user is unauthorized to perform the operation.
-- **500** - internal server error. Something went wrong and you should email support@findmine.com
+- **200** - Item was found on the system.
+- **201** - Item was not found but was scraped and added to the system with the help of the provided JSON encoded body parameters.
+- **400** - Malformed Request. Something is wrong with the request; either required headers or parameters are missing. 
+- **403** - Credentials were not provided with the request and the user is unauthorized to perform the operation.
+- **500** - Internal server error. Something went wrong and you should email support@findmine.com
 
 ## Generating Recommended Sets
 ```http
@@ -251,7 +255,8 @@ Content-Type: application/json
 > For `branded`,`teamed`,`sported` parameters the defaults are set per client's specification. This means that if those parameters are not provided the defaults kick in based on predefined information. These are for the purpose of overriding.
 
 ##### Return Codes
-- **200** - recommendation was generated successfully.
-- **404** - the system could not generate a recommendation for the sample item.
-- **500** - internal server error has happened. Almost exclusively this means that something with the sample item is wrong. There is nothing that can be done from the user side and support@findmine.com should be contacted.
-- **503** - not all of the functionalities of this endpoints are implemented. If you encounter this response just know you are messing around with something we thought of but didn't have time to implement. If you see this, give us a call, we are hiring.
+- **200** - Recommendation was generated successfully.
+- **404** - The system could not generate a recommendation for the sample item.
+- **500** - Internal server error has happened. Almost exclusively this means that something with the sample item is wrong. There is nothing that can be done from the user side and support@findmine.com should be contacted.
+- **503** - Not all of the functionalities of this endpoints are implemented. If you encounter this response just know you are messing around with something we thought of but didn't have time to implement. If you see this, give us a call, we are hiring.
+
