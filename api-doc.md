@@ -70,11 +70,7 @@ Location: https://www.findmine.com/api/v1/items/<item_id:int>
 GET /api/v1/match/sets/<item_id:int>
 ```
 
-This request returns sets that are a match for the item indicated in the query parameter. The match sets `GET` request is meant be called after an items `POST` request. The endpoint needs no information other than the FINDMINE item id, returned by items `POST`, the `Referer` url, and the `Accept` format specifications.
-
-Assuming that the request was successful and sets were matched for the item in question, the response will include one or more sets of items with information pertaining to the set, as well as information about the items within each set.
-
-The request can fail, returning a `404 Not Found` response if for some reason the system was unable to generate an appropriate match for the requested item.
+This request returns sets that are a match for the item indicated in url. The match sets `GET` request is meant to be called after an items `POST` request. The endpoint needs no information other than the FINDMINE `item_id`, returned by items `POST`, the `Referer` url, and the `Accept` format specifications. Currently only the json return format is supported. Assuming that the request was successful and sets were matched for the item in question, the response will include one or more sets of items with information pertaining to the set, as well as information about the items within each set. The request can fail, returning a `404 Not Found` response if for some reason the system was unable to generate an appropriate match for the requested item.
 
 ##### Sample Request
 ```http
