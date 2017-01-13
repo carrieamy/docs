@@ -1,6 +1,6 @@
-# FINDMINE API
+# GENERATING RECOMMENDATIONS
 
-A reference guide to the FINDMINE API
+In order to generate a recommendation two api endpoints play instrumental role in doing so. The items POST and the match sets GET calls. The match sets api call is the endpoint that actually generates the recommendation however, one must provide an `item_id` of the sample item for which the recommendation will be generated. Since in most cases the request to the FINDMINE servers is generated from the client side and that `item_id` is unknown to the client a second api call can be used to object the id in question. By invoking the items POST call a client is telling FINDMINE to please identify the item in question, by providing parameters describing the item, and items POST will return back the `item_id` of the product. The way items POST is designed is to always return an `item_id`. What that means in practice is that if items POST was not able to identify the product whose information was provided, items POST will then create a new record for a new item in the FINDMINE system and return a new `item_id` value in the form of a `Location` HTTP header.
 
 ## Item Identification
 ```http
@@ -9,7 +9,7 @@ POST /api/v1/items
 
 This request identifies the product that the recommendation will be based upon. The request ensure that the "sample" product of the recommendation has been previously ingested into the FINDMINE system and has been processed. To do so, the endpoint will accept information about the product from the user, process it to conform the provided information to the FINDMINE standards, and finally return a `Localtion` header pointing to the api endpoint where this item can be examined and manipulated. This endpoint will always return a `Location` header with the `item_id` integer, assuming the request was successful.
 
-> notes to pay attention to.
+> This call is a syncronous call and will block for a few seconds if the item cannot be identifies quickly and requires the recording a new item and machine learning for processing the provided parameters. In order to ensure one's system does not block, use some version of a promise or future objects to attach a callback for when this call is complete.
 
 ##### Sample Request
 ```http
