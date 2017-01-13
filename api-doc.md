@@ -20,21 +20,16 @@ POST /api/v1/items HTTP/1.1
 Content-Type: application/json
 
 {
-	"url": "http://www.sample.com/{route/to/canonical/product/page}",
-  	"html": "<html>{raw html of the product page that is loaded}</html>",
+	"url": "http://www.sample.com/{route/to/product/page}",
+  	"html": "{HTML}",
   	"images": [
     	{
-      		"id_tag": null,
-      		"class_tag": null,
-      		"xpath": "/html/body/div[1]/div[4]/div/div[2]/segment[1]/div[1]/div[1]/div[1]/div/div[1]/div/div/ul/li[1]/img",
-      		"height": 54,
-      		"width": 54,
-      		"magnitude": 76.36753236814714,
-      		"theta": 0.7853981633974483,
-      		"img_url": "http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw16bf7c60/zoom/S97153_21_model.jpg?sw=60&sfrm=jpg",
-      		"tag_idx": 1958,
-      		"top": 137.0000061035156,
-      		"state": 0
+      		"img_url": "http://www.sample.com/product-image1.jpg",
+      		"state": 1
+    	},
+        {
+      		"img_url": "http://www.sample.com/product-image2.jpg",
+      		"state": 1
     	}
   	]
 }
