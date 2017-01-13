@@ -37,8 +37,6 @@ Location: https://www.findmine.com/api/v1/items/<item_id:int>
 
 - `url` [ *str* ] **required** - url of the product page that contains the identifiable item.
 
-> `pid` does not have to be unique, however, if it is not when searching for those PID's the search result will provide multiple results.
-
 ##### Return Codes
 - **200** - Item was found on the system.
 - **201** - Item was not found but was scraped and added to the system with the help of the provided JSON encoded body parameters.
