@@ -21,18 +21,7 @@ POST /api/v1/items HTTP/1.1
 Content-Type: application/json
 
 {
-    "url": "http://www.sample.com/{route/to/product/page}",
-    "html": "{HTML}",
-    "images": [
-        {
-            "img_url": "http://www.sample.com/product-image1.jpg",
-            "state": 1
-        },
-        {
-            "img_url": "http://www.sample.com/product-image2.jpg",
-            "state": 1
-        }
-    ]
+    "url": "http://www.sample.com/{route/to/product/page}"
 }
 ```
 
@@ -47,18 +36,6 @@ Location: https://www.findmine.com/api/v1/items/<item_id:int>
 > All passed parameters will be processed by the FINDMINE system and those parameters that are not specified by explicit numerical representation will be ingested using machine learning and mapping technologies to transform them into explicit IDs
 
 - `url` [ *str* ] **required** - url of the product page that contains the identifiable item.
-- `html` [ *str* ] - raw and rendered version of the html code of the product page.
-- `words` - 
-- `images` [ *list[dict]* ] - list of objects containing image information of the sample product.
-- `sport` [ *int* | *str* ] - either an exact number representing the sport_id on the FINDMINE system or a string definition of the particular sport of the product.
-- `category` [ *int* | *str* ] - either an exact number representing the category_id of the product or a string definition of the category for the product. For the string definition, this may include bread crumbs, category name, etc.
-- `title` [ *str* ] - the title of the sample product.
-- `description` [ *str* ] - description of the product. This can be any combination of words. The more the better. Our system will process out information from this and will help recognize the item better overall.
-- `price` [ *int* | *float* ] - a numerical representation of the price for the product.
-- `pid` [ *str* ] - (Product ID "pid") can be any string that represents a tracking id of the item at question. The purpose of this is to help you track one's products using your own tracking enumeration. FINDMINE will provide a unique id for a processed id in the form of `item_id` besides this value.
-- `brand` [ *int* | *str* ] - either a number representing the explicit `brand_id` as provided by the FINDMINE system or a string definition of the brand name.
-- `season` [ *int* | *str* ] - either the explicit `season_id` as recorded by the FINDMINE system or a string definition of the season name.
-- `details` [ *dict* ] - extra storage information for any additional parameters that do not have direct access via the strucutres described above.
 
 > `pid` does not have to be unique, however, if it is not when searching for those PID's the search result will provide multiple results.
 
