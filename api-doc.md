@@ -54,19 +54,21 @@ Location: https://www.findmine.com/api/v1/items/{item_id:int}
 
 
 ##### JSON Body Parameters
-
-- `url` blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
-- `html` - blah blah blah
+- `url` - Url of the product page that contains the identifiable item.
+- `html` - Raw and rendered version of the html code of the product page.
+- `words` - TODO
+- `images` - TODO
+- `sport` - TODO
+- `category` - TODO
+- `title` - TODO
+- `description` - TODO
+- `price` - TODO
+- `pid` - TODO
+- `uni` - TODO
+- `stock` - TODO
+- `brand` - TODO
+- `season` - TODO
+- `details` - TODO
 
 
 
