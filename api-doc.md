@@ -7,8 +7,7 @@ A reference guide to the FINDMINE API
 ```http
 POST /api/v1/items
 ```
-
-blah blah blah some explanations
+This request identifies the product that the recommendation will be based upon. The request ensure that the "sample" product of the recommendation has been previously ingested into the FINDMINE system and has been processed. To do so, the endpoint will accept information about the product from the user, process it to conform the provided information to the FINDMINE standards, and finally return a `Localtion` header pointing to the api endpoint where this item can be examined and manipulated. This endpoint will always return a `Location` header with the `item_id` integer, assuming the request was successful.
 
 > notes to pay attention to.
 
