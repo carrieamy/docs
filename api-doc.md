@@ -1,4 +1,4 @@
-# FINDMINE API - GENERATING RECOMMENDATIONS
+# GENERATING RECOMMENDATIONS
 
 In order to generate a recommendation two api endpoints play instrumental role in doing so. The items POST and the match sets GET calls. The match sets api call is the endpoint that actually generates the recommendation however, one must provide an `item_id` of the sample item for which the recommendation will be generated. Since in most cases the request to the FINDMINE servers is generated from the client side and that `item_id` is unknown to the client a second api call can be used to object the id in question. By invoking the items POST call a client is telling FINDMINE to please identify the item in question, by providing parameters describing the item, and items POST will return back the `item_id` of the product. The way items POST is designed is to always return an `item_id`. What that means in practice is that if items POST was not able to identify the product whose information was provided, items POST will then create a new record for a new item in the FINDMINE system and return a new `item_id` value in the form of a `Location` HTTP header.
 
