@@ -9,6 +9,8 @@ POST /api/v1/items
 
 This request identifies the product that the recommendation will be based upon. The request ensure that the "sample" product of the recommendation has been previously ingested into the FINDMINE system and has been processed. To do so, the endpoint will accept information about the product from the user, process it to conform the provided information to the FINDMINE standards, and finally return a `Localtion` header pointing to the api endpoint where this item can be examined and manipulated. This endpoint will always return a `Location` header with the `item_id` integer, assuming the request was successful.
 
+> This call is a syncronous call and will block for a few seconds if the item cannot be identifies quickly and requires the recording a new item and machine learning for processing the provided parameters. In order to ensure one's system does not block, use some version of a promise or future objects to attach a callback for when this call is complete.
+
 ##### Sample Request
 ```http
 POST /api/v1/items HTTP/1.1
