@@ -1,4 +1,4 @@
-# Javascript Module On-boarding Process
+# Javascript Module On-boarding ProcessA
 
 In this document are described the steps one should follow in order to complete the on-boarding process with the FINDMINE Inc. technology. These bullet point steps explain the overall technical steps needed in order to fully integrate the FINDMINE Inc. technology using the currently developed javascript module. The specific technical information pertaining to the javascript code itself, and the information of how to integrate it, can be found at [Javascript Module Integration Guide](https://github.com/findmine/docs/blob/master/javascript-module-integration-guide.md) and of course for any technical assistance please feel free to contact us at [support@findmine.com](mailto://support@findmine.com)
 
