@@ -88,4 +88,4 @@ That's it. Nothing else is left to do and now it is time to sit back and enjoy a
 
 **NOTE**
 
-If for some reason something is not working or these instructions are not sufficient to get the module running on your website, absolutely feel free to email us at support@findmine.us so we can help.
+If for some reason something is not working or these instructions are not sufficient to get the module running on your website, absolutely feel free to email us at support@findmine.com so we can help.
