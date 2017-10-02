@@ -379,6 +379,77 @@ paths:
           required: true
           type: integer
           format: int64
+        - name: fields
+          in: query
+          type: array
+          items:
+            type: string
+            enum: [brand_id, brand_name, category_id, category_name, colors(color_id, hex_code, pixel_count, weight), date_created, date_updated, description, flagged, images(byte_size, class_tag, height, id_tag, image_id, img_hash, img_url, magnitude, tag_idx, theta, top, width), item_id, item_url, pid, price, sale_id, sale_name, score, season_name, season_id, size_name, size_id, sport_id, sport_name, store_id, store_name, stock, team_id, team_name, title, uni, update_count, user_id]
+          description: |
+            Filter the fields returned in the FINDMINE Item by including those desired in the request. For example, if wishing to to only get the title, price, and an image URL, my request would be as follows: 
+            
+                https://www.findmine.com/api/v1/items/{itemId}?fields=title,price,images(img_url)
+              
+            Below is the full list of fields that can be filtered:
+            
+                brand_id,
+                brand_name,
+                category_id,
+                category_name,
+                colors(
+                    color_id,
+                    hex_code,
+                    image_id,
+                    pixel_count,
+                    weight
+                  ),
+                date_created,
+                date_updated,
+                description,
+                flagged,
+                images(
+                    byte_size,
+                    class_tag,
+                    height,
+                    id_tag,
+                    image_id,
+                    img_hash,
+                    img_url,
+                    item_id,
+                    magnitude,
+                    tag_idx,
+                    theta,
+                    top,
+                    width
+                  ),
+                item_id,
+                item_url,
+                pid,
+                price,
+                sale_id,
+                sale_name,
+                score,
+                season_name,
+                season_id,
+                size_name,
+                size_id,
+                sport_id,
+                sport_name,
+                store_id,
+                store_name,
+                stock,
+                team_id,
+                team_name,
+                title,
+                uni,
+                update_count,
+                user_id
+                
+            Note: For "images" and "colors" fields the user must include the desired fields within paratheses after the main field; for example:
+            
+                colors(color_id,hex_code,image_id,pixel_count,weight)
+                
+                images(byte_size,class_tag,height,id_tag,image_id,img_hash,img_url,item_id,magnitude,tag_idx,theta,top,width)
       responses:
         '200':
           description: >-
