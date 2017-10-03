@@ -523,6 +523,147 @@ paths:
             required: false
             type: integer
             format: int64
+          - name: fields
+            in: query
+            type: array
+            items:
+              type: string
+              enum:
+                - brand_id
+                - brand_ids
+                - brand_name
+                - category_id
+                - category_name
+                - colors
+                - color_id
+                - hex_code
+                - pixel_count
+                - weight
+                - date_created
+                - date_updated
+                - description
+                - flagged
+                - images
+                - byte_size
+                - class_tag
+                - height
+                - id_tag
+                - image_id
+                - img_hash
+                - img_url
+                - magnitude
+                - tag_idx
+                - theta
+                - top
+                - width
+                - item_id
+                - item_url
+                - pid
+                - price
+                - sale_id
+                - sale_name
+                - score
+                - season_name
+                - season_id
+                - set_id
+                - set_items
+                - size_name
+                - size_id
+                - sport_id
+                - sport_name
+                - store_id
+                - store_ids
+                - store_name
+                - stock
+                - style_name
+                - team_id
+                - team_name
+                - title
+                - uni
+                - update_count
+                - user_id
+            description: >
+              Filter the fields returned in the FINDMINE Set and Set Items by including those
+              desired in the request. For example, if wishing to to only get the
+              set ID and the titles, prices, and an image URLs of all items included in the sets the request would be as follows: 
+
+                  https://www.findmine.com/api/v1/match/sets/{itemId}?fields=set_id,set_items(title,price,images(img_url))
+              
+              Below is the full list of fields that can be filtered:
+                
+                  brand_ids,
+                  date_created,
+                  date_updated,
+                  flagged,
+                  href,
+                  item_ids,
+                  occasion_name,
+                  occasion_id,
+                  published,
+                  set_id,
+                  set_items(
+                      brand_id,
+                      brand_name,
+                      category_id,
+                      category_name,
+                      colors(
+                          color_id,
+                          hex_code,
+                          image_id,
+                          pixel_count,
+                          weight
+                      ),
+                      date_created,
+                      date_updated,
+                      description,
+                      flagged,
+                      images(
+                          byte_size,
+                          class_tag,
+                          height,
+                          id_tag,
+                          image_id,
+                          img_hash,
+                          img_url,
+                          item_id,
+                          magnitude,
+                          tag_idx,
+                          theta,
+                          top,
+                          width
+                      ),
+                      item_id,
+                      item_url,
+                      pid,
+                      price,
+                      sale_id,
+                      sale_name,
+                      score,
+                      season_name,
+                      season_id,
+                      size_name,
+                      size_id,
+                      sport_id,
+                      sport_name,
+                      store_id,
+                      store_name,
+                      stock,
+                      team_id,
+                      team_name,
+                      title,
+                      uni,
+                      update_count,
+                      user_id
+                  ),
+                  store_ids,
+                  style_id,
+                  style_name,
+                  user_id
+                
+              Note: For "set_items" the user must include the
+              desired fields within paratheses after the main field; for example:
+
+                  set_items(title,price,images(img_url))
         responses:
           '200':
             description: Recommended set exists and is returned
@@ -578,6 +719,7 @@ paths:
             in: query
             description: Product price of the item purchased in the client's transaction
             type: string
+
         responses:
           '204':
             description: Transaction info was sent to FINDMINE successfully
@@ -634,6 +776,147 @@ paths:
           required: false
           type: integer
           format: int64
+        - name: fields
+          in: query
+          type: array
+          items:
+            type: string
+            enum:
+              - brand_id
+              - brand_ids
+              - brand_name
+              - category_id
+              - category_name
+              - colors
+              - color_id
+              - hex_code
+              - pixel_count
+              - weight
+              - date_created
+              - date_updated
+              - description
+              - flagged
+              - images
+              - byte_size
+              - class_tag
+              - height
+              - id_tag
+              - image_id
+              - img_hash
+              - img_url
+              - magnitude
+              - tag_idx
+              - theta
+              - top
+              - width
+              - item_id
+              - item_url
+              - pid
+              - price
+              - sale_id
+              - sale_name
+              - score
+              - season_name
+              - season_id
+              - set_id
+              - set_items
+              - size_name
+              - size_id
+              - sport_id
+              - sport_name
+              - store_id
+              - store_ids
+              - store_name
+              - stock
+              - style_name
+              - team_id
+              - team_name
+              - title
+              - uni
+              - update_count
+              - user_id
+          description: >
+            Filter the fields returned in the FINDMINE Set and Set Items by including those
+            desired in the request. For example, if wishing to to only get the
+            set ID and the titles, prices, and an image URLs of all items included in the sets the request would be as follows: 
+
+                https://www.findmine.com/api/v1/match/sets/{itemId}?fields=set_id,set_items(title,price,images(img_url))
+              
+            Below is the full list of fields that can be filtered:
+                
+                brand_ids,
+                date_created,
+                date_updated,
+                flagged,
+                href,
+                item_ids,
+                occasion_name,
+                occasion_id,
+                published,
+                set_id,
+                set_items(
+                    brand_id,
+                    brand_name,
+                    category_id,
+                    category_name,
+                    colors(
+                        color_id,
+                        hex_code,
+                        image_id,
+                        pixel_count,
+                        weight
+                    ),
+                    date_created,
+                    date_updated,
+                    description,
+                    flagged,
+                    images(
+                        byte_size,
+                        class_tag,
+                        height,
+                        id_tag,
+                        image_id,
+                        img_hash,
+                        img_url,
+                        item_id,
+                        magnitude,
+                        tag_idx,
+                        theta,
+                        top,
+                        width
+                    ),
+                    item_id,
+                    item_url,
+                    pid,
+                    price,
+                    sale_id,
+                    sale_name,
+                    score,
+                    season_name,
+                    season_id,
+                    size_name,
+                    size_id,
+                    sport_id,
+                    sport_name,
+                    store_id,
+                    store_name,
+                    stock,
+                    team_id,
+                    team_name,
+                    title,
+                    uni,
+                    update_count,
+                    user_id
+                ),
+                store_ids,
+                style_id,
+                style_name,
+                user_id
+                
+            Note: For "set_items" the user must include the
+            desired fields within paratheses after the main field; for example:
+
+                set_items(title,price,images(img_url))
       responses: 
         '200':
           description: Item was successfully identified and a recommended set exists and is returned
@@ -698,6 +981,147 @@ paths:
           required: false
           type: integer
           format: int64
+        - name: fields
+          in: query
+          type: array
+          items:
+            type: string
+            enum:
+              - brand_id
+              - brand_ids
+              - brand_name
+              - category_id
+              - category_name
+              - colors
+              - color_id
+              - hex_code
+              - pixel_count
+              - weight
+              - date_created
+              - date_updated
+              - description
+              - flagged
+              - images
+              - byte_size
+              - class_tag
+              - height
+              - id_tag
+              - image_id
+              - img_hash
+              - img_url
+              - magnitude
+              - tag_idx
+              - theta
+              - top
+              - width
+              - item_id
+              - item_url
+              - pid
+              - price
+              - sale_id
+              - sale_name
+              - score
+              - season_name
+              - season_id
+              - set_id
+              - set_items
+              - size_name
+              - size_id
+              - sport_id
+              - sport_name
+              - store_id
+              - store_ids
+              - store_name
+              - stock
+              - style_name
+              - team_id
+              - team_name
+              - title
+              - uni
+              - update_count
+              - user_id
+          description: >
+            Filter the fields returned in the FINDMINE Set and Set Items by including those
+            desired in the request. For example, if wishing to to only get the
+            set ID and the titles, prices, and an image URLs of all items included in the sets the request would be as follows: 
+
+                https://www.findmine.com/api/v1/match/sets/{itemId}?fields=set_id,set_items(title,price,images(img_url))
+              
+            Below is the full list of fields that can be filtered:
+                
+                brand_ids,
+                date_created,
+                date_updated,
+                flagged,
+                href,
+                item_ids,
+                occasion_name,
+                occasion_id,
+                published,
+                set_id,
+                set_items(
+                    brand_id,
+                    brand_name,
+                    category_id,
+                    category_name,
+                    colors(
+                        color_id,
+                        hex_code,
+                        image_id,
+                        pixel_count,
+                        weight
+                    ),
+                    date_created,
+                    date_updated,
+                    description,
+                    flagged,
+                    images(
+                        byte_size,
+                        class_tag,
+                        height,
+                        id_tag,
+                        image_id,
+                        img_hash,
+                        img_url,
+                        item_id,
+                        magnitude,
+                        tag_idx,
+                        theta,
+                        top,
+                        width
+                    ),
+                    item_id,
+                    item_url,
+                    pid,
+                    price,
+                    sale_id,
+                    sale_name,
+                    score,
+                    season_name,
+                    season_id,
+                    size_name,
+                    size_id,
+                    sport_id,
+                    sport_name,
+                    store_id,
+                    store_name,
+                    stock,
+                    team_id,
+                    team_name,
+                    title,
+                    uni,
+                    update_count,
+                    user_id
+                ),
+                store_ids,
+                style_id,
+                style_name,
+                user_id
+                
+            Note: For "set_items" the user must include the
+            desired fields within paratheses after the main field; for example:
+
+                set_items(title,price,images(img_url))
       responses: 
         '200':
           description: Item ID found and a recommended set exists and is returned
