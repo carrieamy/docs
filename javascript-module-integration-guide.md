@@ -1,9 +1,9 @@
-#Integration Guide
+# Integration Guide
 
-####Requirements
+#### Requirements
 This document presumes that the reader is familiar with html, javascript, and jQuery.
 
-####Terminology
+#### Terminology
 - **FINDMINE**: the FINDMINE server and API platform, which is responsible for processing and generating the recommendation data as well as identifying your products.
 - **findmine.js**: a javascript file that contains the client-side code for automating the submission of requests to the server side as well as rendering the recommendations.
 - **findmine**: a javascript global object, created upon the execution of findmine.js, which provides front-end functionality for accessing data returned from FINDMINE. 
