@@ -652,8 +652,8 @@ Content-Type: application/json
 - `branded` [ *int* ] - if the branded parameter is passed as 1, then it means that only sets with items of the same brand as the item passed in the request are returned.
 - `teamed` [ *int* ] - if the teamed parameter is passed as 1, then only sets with items of the same team (or default team) as the item passed in the request are returned.
 - `sported` [ *int* ] - if the sported parameter is passed as 1, then only sets with items of the same sport (or default sport) as the item passed in the request are returned.
-- 'sized' [ *int* ] - if the sized parameter is passed as 1, then only sets with items of the same size as the item passed in the request are returned.
-- 'saled' [ *int* ] - if the saled parameter is passed as 1, then only sets with items of the same sale as the item passed in the request are returned. If the saled parameter is passed as 2, then on sale items will not appear in sets that are returned
+- `sized` [ *int* ] - if the sized parameter is passed as 1, then only sets with items of the same size as the item passed in the request are returned.
+- `saled` [ *int* ] - if the saled parameter is passed as 1, then only sets with items of the same sale as the item passed in the request are returned. If the saled parameter is passed as 2, then on sale items will not appear in sets that are returned
 
 > For `branded`, `teamed`, `sported`, `sized`, and `saled` parameters the defaults are set per client's specification. This means that if those parameters are not provided the defaults kick in based on predefined information. These are for the purpose of overriding.
 
