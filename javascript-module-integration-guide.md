@@ -19,7 +19,7 @@ This document presumes that the reader is familiar with html, javascript, and jQ
 Once the module is loaded, the **findmine** object will be created globally and may be interacted with via the console.
 ![Findmine Global](https://github.com/Mishki/docs/blob/master/assets/findmine-global.gif)
 
-###2. The findmine Object Description
+### 2. The findmine Object Description
 The findmine object exposes three important methods:
 
 ```javascript
@@ -44,7 +44,7 @@ The render function renders the necessary html to the specified tag by the **sel
 }
 ```
 
-###3. Call match(), and Configure the Callback Methods
+### 3. Call match(), and Configure the Callback Methods
 When match() completes, it returns a Deferred object, and you really would be able to attach asynchronous handlers to be called upon its completion. This section also applies to identify(). For example, the following code calls match() and attaches the .then() handler to the Deferred object. Note that the handlers are chained in jQuery fashion. Please see jQuery’s documentation for more details.
 
 ```javascript
@@ -67,7 +67,7 @@ Please ensure that there is a provided html container for the module to be rende
 <div id="findmine-container"></div>
 ```
 
-###4. Create Your Own HTML or Style Ours with CSS
+### 4. Create Your Own HTML or Style Ours with CSS
 
 The match() method stores our recommendations within the findmine object, in findmine.matched. Therefore, you can access this data and update your page however you’d like. The render() method will produce a bare-bones html elements containing the recommendations data from the match() results. Therefore, you can style this element as you see fit. If you chose to use our default styling make sure to include the approapriate link tag in the header section of your product html code.
 ```html
@@ -75,7 +75,7 @@ The match() method stores our recommendations within the findmine object, in fin
 ```
 Alternatively you may either implement your own CSS styling or work with our representatives to obtain the appropriate url for the CSS stylesheet file FINDMINE has built for your store.
 
-###5. Work with us to improve the data FINDMINE identifies from your items
+### 5. Work with us to improve the data FINDMINE identifies from your items
 FINDMINE identifies and recommends items based on several pieces of data that we gather from your website. This data includes:
 - title
 - description
