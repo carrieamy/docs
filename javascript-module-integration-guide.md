@@ -67,14 +67,15 @@ Please ensure that there is a provided html container for the module to be rende
 <div id="findmine-container"></div>
 ```
 
-###3. Create Your Own HTML or Style Ours
+###4. Create Your Own HTML or Style Ours with CSS
+
 The match() method stores our recommendations within the findmine object, in findmine.matched. Therefore, you can access this data and update your page however you’d like. The render() method will produce a bare-bones html elements containing the recommendations data from the match() results. Therefore, you can style this element as you see fit. If you chose to use our default styling make sure to include the approapriate link tag in the header section of your product html code.
 ```html
 <link rel="stylesheet" type="text/css" href="https://www.findmine.com/static/css/findmine.css">
 ```
-Alternatively you may either implement your own styling or work with our representatives to obtain the appropriate url for the stylesheet file FINDMINE has built for your store.
+Alternatively you may either implement your own CSS styling or work with our representatives to obtain the appropriate url for the CSS stylesheet file FINDMINE has built for your store.
 
-###4. Work with us to improve the data FINDMINE identifies from your items
+###5. Work with us to improve the data FINDMINE identifies from your items
 FINDMINE identifies and recommends items based on several pieces of data that we gather from your website. This data includes:
 - title
 - description
@@ -83,7 +84,7 @@ FINDMINE identifies and recommends items based on several pieces of data that we
 
 We use a machine learning model by default to find these pieces of data in your page. But you can make item recognition even more accurate by tagging this data in your page in a CSS-identifiable way. We will then work with you to develop a protocol for retrieving your tagged data.
 
-### 5. The End
+### 6. The End
 That's it. Nothing else is left to do and now it is time to sit back and enjoy automatically generated complimentary product sets on your site. Keep in mind that the recommendations may not appear right away and will only start working officially once our technical team processes your activation the system and once sets are approved by your merchandising team (if desired).
 
 **NOTE**
