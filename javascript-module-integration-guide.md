@@ -65,9 +65,9 @@ Please ensure that there is a provided html container for the module to be rende
 <div id="findmine-container"></div>
 ```
 
-### 4. Create Your Own HTML or Style Ours with CSS
+### 4. Styling the module
 
-*NOTE:* Our preferred styling and html integration is to work with our representatives to use our team to build out a CSS stylesheet and HTML tailored to your page. We will give you a custom css file to link in your header.
+For styling and html integration you will work with our representatives and use our team to build out a CSS stylesheet and HTML tailored to your page. We will give you a custom css file to link in your header.
 
 Alternatively, the match() method stores our recommendations within the findmine object, in findmine.matched. Therefore, you can access this data and update your page however you’d like. The render() method will produce a bare-bones html elements containing the recommendations data from the match() results. You may style this element as you see fit. If you chose to use our default styling make sure to include the approapriate link tag in the header section of your product html code.
 ```html
