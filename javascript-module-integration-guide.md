@@ -10,7 +10,7 @@ This document presumes that the reader is familiar with html, javascript, and jQ
 - **item**: a unit representing a single identified product page. The product upon which the recommendation is being generated may be referred to as **sample item**, in contrast to the items which comprise a recommended set.
 - **set**: a collection of items that complement the currently displayed sample item. Each set may or may not contain the sample item amongst the items associated to the set.
 
-###1. Embed findmine.js Module into your Website
+### 1. Embed findmine.js Module into your Website
 **findmine.js** creates a global javascript object called **findmine**, which you can use to request recommendations. In order to embed the findmine.js module, simply include the following lines in the header section of the html code pertaining to the product detail pages.
 ```html
 <script src="http://www.findmine.com/findmine-latest.js"> </script>
