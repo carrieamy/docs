@@ -32,9 +32,9 @@ Should map to site categories (breadcrumbs) as opposed to generic categories lik
 ##### Note: 
 The fields in your feed do not need to be named exactly as indicated. We can map your values to ours. For example, your feed may include Image URL instead of Image, etc.
 
-#### Optional data based on your business rules:
+#### Additional data based on your business rules:
 
-Optional data we can glean from the feed. This data does not explicitly need to be separate fields, we just need some way to  these heuristics. We’ve included examples of how some of our other clients have provided these data points.
+Additional data we can glean from the feed. This data does not explicitly need to be separate fields, we just need some way to  these heuristics. We’ve included examples of how some of our other clients have provided these data points.
 
 ##### Sale price or discount 
 ex: could be indicated by price ending in .99, marked as a separate field or discount field
@@ -53,10 +53,6 @@ ex: can be pulled from product title
 
 ##### Brand 
 ex: can be pulled from product title
-
-#### Additional data that can enhance our algorithm’s performance:
-
-These additional data fields can be used by our model to learn more about your products and deliver better outfit recommendations, but the system will function without them.
 
 #### Description
 
