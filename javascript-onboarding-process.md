@@ -7,7 +7,7 @@ For additional technical assistance please feel free to contact us at [support@f
 ### 1. Transfer Product Feed via SFTP or API integration
 FINDMINE first needs to access your product information. There are two methods by which we recommend you share your product information on an ongoing basis: 
 * Drop feed files to FINDMINE's sftp server:
- * Your feed file can be anything that contains basic product information such as title, description, price, image URL, item URL, etc. 
+ * Your feed file can be anything that contains basic product information such as title, description, price, image URL, item URL, etc. See full [feed documentation here](https://github.com/findmine/docs/blob/master/feed-doc.md).
  * FINDMINE's SFTP is sftp.findmine.com. Your account rep will provide you a unique username and password. 
  * Set up a recurring feed drop to the SFTP. Work with your account rep to determine the best frequency, but we typically recommend once per day.   
 - OR use your product API. If you have a product catalog API, send integration details to your account rep. This method ensures that product information always stays up to date, and more complex/custom integrations are possible. 
