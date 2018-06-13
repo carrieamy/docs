@@ -4,7 +4,6 @@ Work in progress. We are planning to release official public documentation to ou
 
 contact@findmine.com
 
-
 # GENERATING RECOMMENDATIONS
 
 Two FINDMINE API endpoints are needed in order to generate a recommendation for a particular item: the items POST and the match sets GET calls. The match sets API call is the endpoint that actually generates the recommendation for a particular item. However, one must provide a FINDMINE `item_id` of the item for which the recommendation will be generated. Since, in most cases, the request to the FINDMINE servers is generated from the client side and that FINDMINE `item_id` is unknown to the client, a second API call can be used to obtain the id in question. 
